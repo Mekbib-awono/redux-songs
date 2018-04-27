@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import SongReducer from './SongReducer';
+import SongListReducer from './SongListReducer';
+import PlayHistoryReducer from './PlayHistoryReducer';
+import FavoritesReducer from './FavoritesReducer';
 
 export default combineReducers({
-  songs: SongReducer,
+    songs: SongListReducer,
+    // favorites: FavoritesReducer,
+    // history: PlayHistoryReducer,
 });
