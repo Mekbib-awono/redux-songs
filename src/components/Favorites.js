@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Table, Button } from 'semantic-ui-react';
 
 import { unfavoriteSong } from '../actions/SongActions';
 
@@ -12,26 +13,26 @@ class Favorites extends Component {
         }
 
         const favorites = songs.map(song => (
-          <tr key={song.id}>
-                <td>{song.title}</td>
-              <td><button onClick={() => this.props.unfavoriteSong(song)}>Remove</button> </td>
-            </tr>
+          <Table.Row key={song.id}>
+                <Table.Cell>{song.title}</Table.Cell>
+              <Table.Cell><Button size="mini" onClick={() => this.props.unfavoriteSong(song)}>Remove</Button> </Table.Cell>
+            </Table.Row>
         ));
 
         return (
             <div>
-            <h3>Favorites</h3>
-            <table>
-                <thead>
-                        <tr>
-                            <th>Song title</th>
-                            <th>Favorite</th>
-                  </tr>
-                    </thead>
-                    <tbody>
+            <h3>FAVORITES</h3>
+            <Table>
+                <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Song title</Table.HeaderCell>
+                            <Table.HeaderCell>Favorite</Table.HeaderCell>
+                  </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
                         {favorites}
-              </tbody>
-                </table>
+              </Table.Body>
+                </Table>
           </div>
         );
     }

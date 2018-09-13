@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button, Input } from 'semantic-ui-react';
 
 import { addSong } from '../actions/SongActions';
 
@@ -28,8 +29,11 @@ class SongForm extends Component {
           <div>
               <br />
               <form onSubmit={e => this.onSubmit(e)}>
-                  <input type="text" name="song" id="title" /> <br />
-                  <button type="submit" >ADD SONG</button>
+
+                  <Input type="text" name="song" id="title" /> &nbsp;
+                  <Button size="tiny">ADD SONG</Button>
+
+
                 </form>
               <br />
             </div>

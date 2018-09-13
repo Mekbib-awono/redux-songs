@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Table, Button } from 'semantic-ui-react';
+
 import { deleteSongCount, deleteSongHistory } from '../actions/SongActions';
 
 class PlayHistory extends Component {
     render() {
         const songs = this.props.history.map(song => (
-          <tr key={song.id}>
-              <td>{song.title}</td>
-              <td><button onClick={() => this.props.deleteSongCount(song)}>Reset count</button> </td>
-            </tr>
+          <Table.Row key={song.id}>
+              <Table.Cell>{song.title}</Table.Cell>
+              <Table.Cell><Button size="mini" onClick={() => this.props.deleteSongCount(song)}>Reset count</Button> </Table.Cell>
+            </Table.Row>
         ));
 
         if (!songs.length) {
@@ -18,20 +20,20 @@ class PlayHistory extends Component {
 
         return (
           <div>
-              <h3>PLAY HISTORY <button onClick={() => this.props.deleteSongHistory()}>DELETE HISTORY</button> </h3>
-              <table>
-                  <thead>
-                      <tr />
-                      <tr>
-                          <th>Song title</th>
-                          <th>Action</th>
-                        </tr>
-                    </thead>
-                  <tbody>
+              <h3>PLAY HISTORY <Button size="mini" onClick={() => this.props.deleteSongHistory()}>DELETE HISTORY</Button> </h3>
+              <Table>
+                  <Table.Header>
+                      <Table.Row />
+                      <Table.Row>
+                          <Table.HeaderCell>Song title</Table.HeaderCell>
+                          <Table.HeaderCell>Action</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                  <Table.Body>
                       {songs}
-                    </tbody>
+                    </Table.Body>
 
-                </table>
+                </Table>
             </div>
         );
     }

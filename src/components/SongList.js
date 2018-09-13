@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Table, Button } from 'semantic-ui-react';
+
 import SongForm from './SongForm';
 
 import {
@@ -11,27 +13,27 @@ import {
 } from '../actions/SongActions';
 
 class SongList extends Component {
-    // constructor(props) {
-    //   super(props);
-    //   this.state = {
-    //     songs: [{
-    //       id: 1,
-    //       title: 'Californian raisins',
-    //       playcount: 0,
-    //       isFavorite: false,
-    //     }, {
-    //       id: 2,
-    //       title: 'Smooth criminal',
-    //       playcount: 0,
-    //       isFavorite: true,
-    //     }, {
-    //       id: 3,
-    //       title: 'Living on a prayer',
-    //       playcount: 0,
-    //       isFavorite: false,
-    //     }],
-    //   };
-    // }
+// constructor(props) {
+//   super(props);
+//   this.state = {
+//     songs: [{
+//       id: 1,
+//       title: 'Californian raisins',
+//       playcount: 0,
+//       isFavorite: false,
+//     }, {
+//       id: 2,
+//       title: 'Smooth criminal',
+//       playcount: 0,
+//       isFavorite: true,
+//     }, {
+//       id: 3,
+//       title: 'Living on a prayer',
+//       playcount: 0,
+//       isFavorite: false,
+//     }],
+//   };
+// }
 
     componentWillMount() {
         this.props.loadSongs();
@@ -42,49 +44,49 @@ class SongList extends Component {
 
         if (!songs || !songs.length) {
             return (
-              <div>
-                  <SongForm />
-                  <p>No Songs in your library</p>
-                </div>);
+                <div>
+                <SongForm />
+                <p>No Songs in your library</p>
+              </div>);
         }
 
         const songEl = songs.map(song => (
-          <tr key={song.id}>
-              <td>{song.title}</td>
-              <td>{song.isFavorite ?
-                  <button onClick={() => this.props.unfavoriteSong(song)}>Remove</button> :
-                    <button onClick={() => this.props.favoriteSong(song)}>Add</button>
+            <Table.Row key={song.id}>
+            <Table.Cell>{song.title}</Table.Cell>
+                <Table.Cell>{song.isFavorite ?
+                <Button compact size="mini" onClick={() => this.props.unfavoriteSong(song)}>Remove</Button> :
+                    <Button compact size="mini" onClick={() => this.props.favoriteSong(song)}>Add</Button>
                 }
-                </td>
-              <td>
-              <button onClick={() => this.props.playSong(song)}>Play</button> &nbsp;
-              <button onClick={() => this.props.deleteSong(song)}>Delete</button>
-            </td>
-              <td>{song.playCount}</td>
-            </tr>
+              </Table.Cell>
+                <Table.Cell>
+                    <Button compact size="mini" onClick={() => this.props.playSong(song)}>Play</Button> &nbsp;
+                <Button compact size="mini" onClick={() => this.props.deleteSong(song)}>Delete</Button>
+              </Table.Cell>
+                <Table.Cell>{song.playCount}</Table.Cell>
+          </Table.Row>
         ));
 
 
         return (
-          <div>
-              <SongForm />
+            <div style={{ width: '80%', margin: '0 auto' }}>
+                <SongForm />
 
                 <h3>SONG LIST</h3>
 
-              <table>
-                    <thead>
-                        <tr>
-                            <th>Song title</th>
-                            <th>Favorite</th>
-                        <th>Actions</th>
-                        <th>play count</th>
-                      </tr>
-                </thead>
-                  <tbody>
-                      {songEl}
-                    </tbody>
-                </table>
-            </div>
+                <Table striped>
+                <Table.Header>
+                      <Table.Row>
+                            <Table.HeaderCell>Song title</Table.HeaderCell>
+                            <Table.HeaderCell>Favorite</Table.HeaderCell>
+                            <Table.HeaderCell>Actions</Table.HeaderCell>
+                            <Table.HeaderCell>play count</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {songEl}
+                  </Table.Body>
+              </Table>
+          </div>
         );
     }
 }
